@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema</title>
+    <script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-TODO" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./../../static/css/index.css">
+</head>
+<body>
+    <header>
+        <p>Tarefas</p>
+        <p>Contato</p>
+        <p>Meu nome</p>
+    </header>
+    
+     <h1>Lista de Tarefas</h1>
+
+    <!-- Lista carregada por HTMX -->
+    <div hx-get="@{/usuariosfinal/tarefas}" 
+         hx-trigger="load" 
+         hx-target="#lista-container" 
+         hx-swap="innerHTML">
+    </div>
+
+    <div id="lista-container"></div>
+
+    <form hx-post="@{/usuariosfinal/postarTarefa}" 
+          hx-target="#lista-container" 
+          hx-swap="beforeend">
+        <input type="text" name="nome" placeholder="Nome da tarefa"/>
+        <input type="text" name="descricao" placeholder="Descrição"/>
+        <button type="submit">Adicionar</button>
+    </form>
+</body>
+</html>

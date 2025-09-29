@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/htmx.org@1.9.11" integrity="sha384-TODO" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div th:fragment="lista-tarefas">
+        <ul id="lista-tarefas">
+            <li th:each="tarefa : ${tarefas}" th:replace="this :: item-tarefa(${tarefa})">
+            </li>
+        </ul>
+    </div>
+
+    <div>
+         <li th:fragment="item-tarefa(tarefa)">
+        <span th:text="${tarefa.nome}"></span>
+        <button hx-delete="@{/usuariosfinal/{id}(id=${tarefa.id})}" 
+                hx-target="closest li" hx-swap="outerHTML">
+            Deletar
+        </button>
+    </li>
+    </div>
+    
+    <div th:fragment="tarefa-unica">
+        <h3 th:text="${tarefa.nome}"></h3>
+        <p th:text="${tarefa.descricao}"></p>
+    </div>
+    
+     <div th:fragment="post-tarefa">
+        <li th:replace="this :: item-tarefa(${tarefa})"></li>
+    </div>
+</body>
+</html>
