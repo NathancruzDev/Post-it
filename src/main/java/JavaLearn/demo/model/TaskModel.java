@@ -29,6 +29,10 @@ public class TaskModel {
     @NotBlank
     String tarefa;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserModel userModel;
+
     public TaskModel() {
     }
 
@@ -78,5 +82,13 @@ public class TaskModel {
             this.tarefa=task.tarefa();
         }
 
+    }
+
+    public UserModel getUserModel() {
+        return userModel;
+    }
+
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
     }
 }

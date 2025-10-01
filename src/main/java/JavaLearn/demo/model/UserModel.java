@@ -7,6 +7,9 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity(name="users")
 @Table(name="users")
 public class UserModel {
@@ -22,9 +25,9 @@ public class UserModel {
     String username;
 
     String confirmPassword;
-    /*    @Column(name = "tasks")
-    @ForeignKey
-    TaskModelDTO taskModelDTO;*/
+
+    @OneToMany(mappedBy = "userModel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TaskModel> tasks = new ArrayList<>();
 
     public UserModel() {
     }
@@ -88,4 +91,13 @@ public class UserModel {
         }
 
     }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
 }
